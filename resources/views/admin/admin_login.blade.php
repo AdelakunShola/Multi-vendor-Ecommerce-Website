@@ -18,6 +18,8 @@
 	<link href="{{asset('adminbackend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('adminbackend/assets/css/app.css')}}" rel="stylesheet">
 	<link href="{{asset('adminbackend/assets/css/icons.css')}}" rel="stylesheet">
+
+	
 	<title>Admin Login</title>
 
 </head>
