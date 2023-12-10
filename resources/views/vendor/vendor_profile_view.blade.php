@@ -28,8 +28,8 @@
 										<div class="d-flex flex-column align-items-center text-center">
 											<img src="{{ (!empty($vendorData->photo)) ? url('upload/vendor_images/'.$vendorData->photo):url('upload/no_image.jpg') }}" alt="Vendor" class="rounded-circle p-1 bg-primary" width="110">
 											<div class="mt-3">
-												<h4>{{ $vendorData->username }}</h4>
-												<p class="text-secondary mb-1">{{ $vendorData->name }}</p>
+												<h4>{{ $vendorData->name }}</h4>
+												<p class="text-secondary mb-1">{{ $vendorData->username }}</p>
 												<p class="text-muted font-size-sm">{{ $vendorData->email }}</p>
 												<button class="btn btn-primary">Follow</button>
 												<button class="btn btn-outline-primary">Message</button>
@@ -77,7 +77,7 @@
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-3">
-												<h6 class="mb-0">Full Name</h6>
+												<h6 class="mb-0">Shop Name</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
 												<input type="text" name="name" class="form-control" value="{{ $vendorData->name }}" />
@@ -85,7 +85,7 @@
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-3">
-												<h6 class="mb-0">Email</h6>
+												<h6 class="mb-0">Vendor Email</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
 												<input type="text" name="email" class="form-control" value="{{ $vendorData->email }}" />
@@ -93,7 +93,7 @@
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-3">
-												<h6 class="mb-0">Phone</h6>
+												<h6 class="mb-0">Vendor Phone No</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
 												<input type="text" name="phone" class="form-control" value="{{ $vendorData->phone }}" />
@@ -101,10 +101,63 @@
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-3">
-												<h6 class="mb-0">Address</h6>
+												<h6 class="mb-0">Vendor Address</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
 												<input type="text" name="address" class="form-control" value="{{ $vendorData->address }}" />
+											</div>
+										</div>
+
+										<div class="row mb-3">
+				                            <div class="col-sm-3">
+					                           <h6 class="mb-0">Vendor Join Date </h6>
+				                            </div>
+				                            <div class="col-sm-9 text-secondary">
+					                           <select name="vendor_join" class="form-select mb-3" aria-label="Default select example">
+					                           <option selected="">Open this select menu</option>
+
+											   <option value="2022" {{ $vendorData->vendor_join == 2022  ? 'selected' : '' }} >2022</option>
+	                                           <option value="2023" {{ $vendorData->vendor_join == 2023  ? 'selected' : '' }}>2023</option>
+	                                           <option value="2024" {{ $vendorData->vendor_join == 2024  ? 'selected' : '' }}>2024</option>
+	                                           <option value="2025" {{ $vendorData->vendor_join == 2025  ? 'selected' : '' }}>2025</option>
+	                                           <option value="2026" {{ $vendorData->vendor_join == 2026  ? 'selected' : '' }}>2026</option>
+					                              </select>
+				                            </div>
+			                            </div>
+
+										<div class="row mb-3">
+				                            <div class="col-sm-3">
+					                            <h6 class="mb-0">Vendor Info</h6>
+				                            </div>
+				                            <div class="col-sm-9 text-secondary">
+				                          	    <textarea name="vendor_short_info" class="form-control" id="inputAddress2" placeholder="Vendor Short Info " rows="3">{{ $vendorData->vendor_short_info }}</textarea>
+			                            	</div>
+			                            </div>
+
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">Twitter</h6>
+											</div>
+											<div class="col-sm-9 text-secondary">
+												<input type="text" name="twitter" class="form-control" value="{{ $vendorData->twitter }}" />
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">Instagram</h6>
+											</div>
+											<div class="col-sm-9 text-secondary">
+												<input type="text" name="instagram" class="form-control" value="{{ $vendorData->instagram }}" />
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">Facebook</h6>
+											</div>
+											<div class="col-sm-9 text-secondary">
+												<input type="text" name="facebook" class="form-control" value="{{ $vendorData->facebook }}" />
 											</div>
 										</div>
 

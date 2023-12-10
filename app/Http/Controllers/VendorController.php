@@ -48,6 +48,12 @@ class VendorController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->vendor_join = $request->vendor_join;
+        $data->vendor_short_info = $request->vendor_short_info;
+        $data->twitter = $request->twitter;
+        $data->instagram = $request->instagram;
+        $data->facebook = $request->facebook;
+        
 
         if ($request->file('photo')) {
             $file = $request->file('photo');
