@@ -46,49 +46,48 @@
                                 <div class="login_wrap widget-taber-content background-white">
                                     <div class="padding_eight_all bg-white">
 
-                                        <form method="POST" action="{{ route('password.store') }}">
-                                           @csrf
+                                    <form method="POST" action="{{ route('password.store') }}">
+        @csrf
 
-                                       <!-- Password Reset Token -->
-                                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
+        <!-- Password Reset Token -->
+        <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
 
-                                       
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-                                            <div class="form-group">
-                                                <input type="password" name="password" required="" id="password" placeholder="Password *" />
-                                            </div>
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                type="password"
+                                name="password_confirmation" required autocomplete="new-password" />
 
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
 
-                                            <div class="form-group">
-                                                <input id="password_confirmation"
-                                                type="password"
-                                                name="password_confirmation" required="" placeholder="Confirm you password *" />
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Reset password</button>
-                                            </div>
-
-                                        </form>
+        <div class="flex items-center justify-end mt-4">
+            <x-primary-button>
+                {{ __('Reset Password') }}
+            </x-primary-button>
+        </div>
+    </form>   
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 pl-50">
-                                <h6 class="mb-15">Password must:</h6>
-                                <p>Be between 8 and 64 characters</p>
-                                <p>Include at least tow of the following:</p>
-                                <ol class="list-insider">
-                                    <li>An uppercase character</li>
-                                    <li>A lowercase character</li>
-                                    <li>A number</li>
-                                    <li>A special character</li>
-                                </ol>
-                                
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -135,38 +134,7 @@
 
 
     <!-- Add this script block at the end of your HTML body -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Function to validate password complexity
-        function validatePassword() {
-            const passwordInput = document.getElementById('password');
-            const password = passwordInput.value;
 
-            // Check if password meets complexity requirements
-            const isLengthValid = password.length >= 8 && password.length <= 64;
-            const hasUppercase = /[A-Z]/.test(password);
-            const hasLowercase = /[a-z]/.test(password);
-            const hasNumber = /\d/.test(password);
-            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-            // Display validation messages
-            const complexityMessage = document.getElementById('complexity-message');
-            complexityMessage.innerHTML = '';
-
-            if (!isLengthValid) {
-                complexityMessage.innerHTML += '<p>Password must be between 8 and 64 characters.</p>';
-            }
-
-            if (!(hasUppercase && hasLowercase && hasNumber && hasSpecialChar)) {
-                complexityMessage.innerHTML += '<p>Password must include at least two of the following: an uppercase character, a lowercase character, a number, and a special character.</p>';
-            }
-        }
-
-        // Attach the validatePassword function to the 'input' event of the password input field
-        const passwordInput = document.getElementById('password');
-        passwordInput.addEventListener('input', validatePassword);
-    });
-</script>
 </body>
 
 </html>
