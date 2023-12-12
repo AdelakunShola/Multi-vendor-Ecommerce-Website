@@ -46,6 +46,10 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-0">Hello {{ Auth::user()->name }}!</h3>
+
+                <br>
+                <img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" height="110" width="110">
+                        
             </div>
             <div class="card-body">
                 <p>
@@ -172,7 +176,8 @@
             </div>
             <div class="card-body">
                
-                <form method="post" name="enq">
+            <form method="post" action="{{ route('user.profile.store') }}" enctype="multipart/form-data">
+                                        @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>User Name <span class="required">*</span></label>
@@ -201,7 +206,7 @@
 
                          <div class="form-group col-md-12">
                               <label>  <span class="required">*</span></label>
-                              <img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                              <img id="showImage" src="{{ (!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" class="rounded-circle p-1 bg-primary" height="110" width="110">
                          </div>
                         
                         <div class="col-md-12">
@@ -219,6 +224,11 @@
                 </div>
             </div>
         </div>
+
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
 
         <script type="text/javascript">
     $(document).ready(function(){
