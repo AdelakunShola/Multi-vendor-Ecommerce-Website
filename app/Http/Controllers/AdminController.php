@@ -26,8 +26,13 @@ class AdminController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        $notification = array(
+            'message' => 'Admin Logged out Successfully',
+            'alert-type' => 'success'
+        );
         
-        return redirect('/admin/login');
+        return redirect('/admin/login')->with($notification);
     }//end method
 
 

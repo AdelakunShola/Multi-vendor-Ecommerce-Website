@@ -26,8 +26,14 @@ class VendorController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        $notification = array(
+            'message' => 'Vendor Logged out Successfully',
+            'alert-type' => 'success'
+        );
         
-        return redirect('/vendor/login');
+        
+        return redirect('/vendor/login')->with($notification);
     }//end method
 
 
