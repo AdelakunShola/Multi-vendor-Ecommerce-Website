@@ -16,8 +16,8 @@
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-                            <a href="{{ route('add.category') }}">
-		 <button  type="button" class="btn btn-primary">Add Category</button>
+                            <a href="{{ route('add.subcategory') }}">
+		 <button  type="button" class="btn btn-primary">Add SubCategory</button>
          </a>
 
 						</div>
@@ -30,24 +30,24 @@
 					<div class="card-body">
 						<div class="table-responsive">
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
-								<thead>
+							<thead>
 			<tr>
 				<th>Sl</th>
 				<th>Category Name </th>
-				<th>Category Image </th>
+				<th>SubCategory Name </th>
 				<th>Action</th> 
 			</tr>
 		</thead>
 		<tbody>
-	@foreach($categories as $key => $item)		
+	@foreach($subcategories as $key => $item)		
 			<tr>
 				<td> {{ $key+1 }} </td>
-				<td>{{ $item->category_name }}</td>
-				<td> <img src="{{ asset($item->category_image) }}" style="width: 70px; height:40px;" >  </td>
-
+				<td>{{$item->category->category_name}}</td>
+                <td>{{ $item->subcategory_name }}</td>
+				
 				<td>
-<a href="{{ route('edit.category',$item->id) }}" class="btn btn-info">Edit</a>
-<a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger" id="delete">Delete</a>
+<a href="{{ route('edit.subcategory',$item->id) }}" class="btn btn-info">Edit</a>
+<a href="{{ route('delete.subcategory',$item->id) }}" class="btn btn-danger" id="delete">Delete</a>
 
 				</td> 
 			</tr>
@@ -57,9 +57,9 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<th>Sl</th>
+                <th>Sl</th>
 				<th>Category Name </th>
-				<th>Category Image </th>
+				<th>SubCategory Name </th>
 				<th>Action</th> 
 			</tr>
 		</tfoot>
