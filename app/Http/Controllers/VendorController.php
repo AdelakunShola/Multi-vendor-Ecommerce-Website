@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+
 
 class VendorController extends Controller
 {
@@ -104,5 +106,38 @@ class VendorController extends Controller
         ]);
         return back()->with("status", "Password Updated Successfully");
 
+    }//end method
+
+
+    public function BecomeVendor () {
+        
+        return view ('auth.become_vendor');
+
+    }//end method
+
+    public function VendorRegister(Request $request){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Password::defaults()],
+             ]);
+        
+
+        $user = User::insert([
+            'name' => $request->name,
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'password' => Hash::make($request->password),
+            'role' => 'vendor',
+            'status' => 'inactive',
+        ]);
+
+        $notification = array(
+            'message' => 'Vendor Registered Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('vendor.login')->with($notification);
     }//end method
 }
