@@ -44,7 +44,7 @@
 				<td> {{ $key+1 }} </td>
 				<td> {{ $item->name }}</td>
 				<td> {{ $item->username }}</td>
-				<td> {{ $item->vendor_join }}</td>
+				<td>  {{ optional($item->created_at)->format('d M, Y') }}</td>
 				<td> {{ $item->email }}  </td>
 				<td> <span class="btn btn-secondary">{{ $item->status }}</span>   </td>
 
