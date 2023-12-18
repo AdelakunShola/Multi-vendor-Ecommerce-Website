@@ -8,13 +8,13 @@
 <div class="page-content"> 
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Inactive Vendor Details</div>
+					<div class="breadcrumb-title pe-3">Active Vendor Details</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Inactive Vendor Details</li>
+								<li class="breadcrumb-item active" aria-current="page">Active Vendor Details</li>
 							</ol>
 						</nav>
 					</div>
@@ -31,17 +31,17 @@
 	<div class="card">
 		<div class="card-body">
 
-		<form method="post" action="{{ route('active.vendor.approve') }}" enctype="multipart/form-data" >
+		<form method="post" action="{{ route('inactive.vendor.approve') }}" enctype="multipart/form-data" >
 			@csrf
 
-            <input type="hidden" name="id" value="{{ $inactiveVendorDetails->id }}">
+		<input type="hidden" name="id" value="{{ $activeVendorDetails->id }}">
 
 			<div class="row mb-3">
 				<div class="col-sm-3">
 					<h6 class="mb-0">User Name</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="text" class="form-control" value="{{ $inactiveVendorDetails->username }}" disabled />
+					<input type="text" class="form-control" name="username" value="{{ $activeVendorDetails->username }}"   />
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -49,7 +49,7 @@
 					<h6 class="mb-0"> Shop Name</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="text" name="name" class="form-control" value="{{ $inactiveVendorDetails->name }}" />
+					<input type="text" name="name" class="form-control" value="{{ $activeVendorDetails->name }}" />
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -57,7 +57,7 @@
 					<h6 class="mb-0">Vendor Email</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="email" name="email" class="form-control" value="{{ $inactiveVendorDetails->email }}" />
+					<input type="email" name="email" class="form-control" value="{{ $activeVendorDetails->email }}" />
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -65,7 +65,7 @@
 					<h6 class="mb-0">Vendor Phone </h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="text" name="phone" class="form-control" value="{{ $inactiveVendorDetails->phone }}" />
+					<input type="text" name="phone" class="form-control" value="{{ $activeVendorDetails->phone }}" />
 				</div>
 			</div>
 
@@ -75,7 +75,7 @@
 					<h6 class="mb-0">Vendor Address</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<input type="text" name="address" class="form-control" value="{{ $inactiveVendorDetails->address }}" />
+					<input type="text" name="address" class="form-control" value="{{ $activeVendorDetails->address }}" />
 				</div>
 			</div>
 
@@ -83,8 +83,8 @@
 				<div class="col-sm-3">
 					<h6 class="mb-0">Vendor Join</h6>
 				</div>
-				<div class="col-sm-9 text-secondary">                                     
-					<input type="text" name="vendor_join" class="form-control" value="{{ optional($inactiveVendorDetails->created_at)->format('d M, Y') }}" />
+				<div class="col-sm-9 text-secondary">
+					<input type="text" name="vendor_join" class="form-control" value="{{ optional($activeVendorDetails->created_at)->format('d M, Y') }}" />
 				</div>
 			</div>
 
@@ -97,7 +97,7 @@
 				</div>
 				<div class="col-sm-9 text-secondary">
 					<textarea name="vendor_short_info" class="form-control" id="inputAddress2" placeholder="Vendor Info " rows="3">
-					{{ $inactiveVendorDetails->vendor_short_info }}
+					{{ $activeVendorDetails->vendor_short_info }}
 				</textarea>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 					<h6 class="mb-0">Vendor Photo</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					 <img id="showImage" src="{{ (!empty($inactiveVendorDetails->photo)) ? url('upload/vendor_images/'.$inactiveVendorDetails->photo):url('upload/no_image.jpg') }}" alt="Vendor" style="width:100px; height: 100px;"  >
+					 <img id="showImage" src="{{ (!empty($activeVendorDetails->photo)) ? url('upload/vendor_images/'.$activeVendorDetails->photo):url('upload/no_image.jpg') }}" alt="Vendor" style="width:100px; height: 100px;"  >
 				</div>
 			</div>
 
@@ -119,7 +119,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9 text-secondary">
-					<input type="submit" class="btn btn-danger px-4" value="Activate Vendor" />
+					<input type="submit" class="btn btn-danger px-4" value="Deactivate Vendor" />
 				</div>
 			</div>
 		</div>
