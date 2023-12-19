@@ -1,6 +1,9 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
 <div class="page-content">
 
 				<!--breadcrumb-->
@@ -63,17 +66,31 @@
 
 
 
-  <div class="mb-3">
-				<label for="inputProductTitle" class="form-label">Main Thambnail</label>
-				<input name="product_thambnail" class="form-control" type="file" id="formFile">
-			  </div>
-
-
-
-  <div class="mb-3">
-				<label for="inputProductTitle" class="form-label">Multiple Image</label>
-				<input class="form-control" name="multi_img[]" type="file" id="formFileMultiple" multiple="">
-			  </div>
+			  <div class="mb-3">
+				<label for="input3" class="form-label">Main Image </label>
+				<input type="file" name="product_thambnail" class="form-control" id="image"  >
+	
+				<img id="showImage" src="" alt="Admin" class="bg-primary" width="70" height="50"> 
+			</div>
+	
+	
+	
+	
+			<div class="mb-3">
+				<label for="input4" class="form-label">Multiple Image </label>
+				<input type="file" name="multi_img[]" class="form-control" multiple id="multiImg" accept="image/jpeg, image/jpg, image/gif, image/png" >
+	
+				
+	
+				<img src="" alt="Admin" class="bg-primary" width="60"> 
+	
+				  <a href=""><i class="lni lni-close"></i> </a>  
+	
+			   
+	
+	
+				<div class="row" id="preview_img"></div>
+			</div>
 
 
 			 
@@ -104,9 +121,9 @@
 					<label for="inputProductType" class="form-label">Product Brand</label>
 					<select name="brand_id" class="form-select" id="inputProductType">
 						<option></option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
+                        @foreach($brands as $brand)
+						<option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                        @endforeach
 					  </select>
 				  </div>
 
@@ -114,9 +131,9 @@
 					<label for="inputVendor" class="form-label">Product Category</label>
 					<select name="category_id" class="form-select" id="inputVendor">
 						<option></option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
+                        @foreach($categories as $cat)
+						<option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                        @endforeach
 					  </select>
 				  </div>
 
@@ -135,9 +152,9 @@
 					<label for="inputCollection" class="form-label">Select Vendor</label>
 					<select name="vendor_id" class="form-select" id="inputCollection">
 						<option></option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
+                        @foreach($activeVendor as $vendor)
+						<option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                        @endforeach
 					  </select>
 				  </div>
 
@@ -204,7 +221,49 @@
 
 
 
+			<script type="text/javascript">
 
+				$(document).ready(function(){
+					$('#image').change(function(e){
+						var reader = new FileReader();
+						reader.onload = function(e){
+							$('#showImage').attr('src',e.target.result);
+						}
+						reader.readAsDataURL(e.target.files['0']);
+					});
+				});
+				
+				</script>   
+				
+				
+				<!--------===Show MultiImage ========------->
+				<script>
+				$(document).ready(function(){
+				$('#multiImg').on('change', function(){ //on file input change
+				if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+				{
+					var data = $(this)[0].files; //this file data
+					 
+					$.each(data, function(index, file){ //loop though each file
+						if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+							var fRead = new FileReader(); //new filereader
+							fRead.onload = (function(file){ //trigger function on successful read
+							return function(e) {
+								var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(100)
+							.height(80); //create image element 
+								$('#preview_img').append(img); //append image to output element
+							};
+							})(file);
+							fRead.readAsDataURL(file); //URL representing the file's data.
+						}
+					});
+					 
+				}else{
+					alert("Your browser doesn't support File API!"); //if File API is absent
+				}
+				});
+				});
+				</script>
 
 
 @endsection
