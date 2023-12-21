@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /* 
 |--------------------------------------------------------------------------
@@ -77,9 +78,9 @@ Route::post('/vendor/update/password', [VendorController::class, 'UpdatePassword
 });
 
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
-Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
+Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
 Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
 
 Route::post('/become/vendor', [VendorController::class, 'VendorRegister'])->name('vendor.register');
@@ -117,14 +118,27 @@ Route::controller(SubCategoryController::class)->group(function(){
     Route::get('/edit/subcategory/{id}', 'EditSubCategory')->name('edit.subcategory');
     Route::post('/update/subcategory', 'UpdateSubCategory')->name('update.subcategory');
     Route::get('/delete/subcategory/{id}', 'DeleteSubCategory')->name('delete.subcategory');
+    Route::get('/subcategory/ajax/{category_id}' , 'GetSubCategory');
 
 });
 
-
+//Product
 Route::controller(ProductController::class)->group(function(){
     Route::get('/all/product' , 'AllProduct')->name('all.product');
     Route::get('/add/product' , 'AddProduct')->name('add.product');
-   
+    Route::post('/store/product' , 'StoreProduct')->name('store.product');
+    Route::get('/edit/product/{id}' , 'EditProduct')->name('edit.product');
+    Route::post('/update/product' , 'UpdateProduct')->name('update.product');
+    Route::post('/update/product/thumbnail' , 'UpdateProductThumbnail')->name('update.product.thumbnail');
+    Route::post('/update/product/multiimage' , 'UpdateProductMultiimage')->name('update.product.multiimage');
+    Route::post('/update/multiimage/delete' , 'MulitImageDelete')->name('product.multiimg.delete');
+
+    Route::get('/product/inactive/{id}' , 'ProductInactive')->name('product.inactive');
+    Route::get('/product/active/{id}' , 'ProductActive')->name('product.active');
+
+    Route::get('/delete/product//{id}' , 'ProductDelete')->name('delete.product');
+    
+    
 
 });
 
