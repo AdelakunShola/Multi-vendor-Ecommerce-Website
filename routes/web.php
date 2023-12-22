@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\SliderController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -131,7 +132,7 @@ Route::controller(BrandController::class)->group(function(){
 
 });
 
-
+  //Admin Category All Route
 Route::controller(CategoryController::class)->group(function(){
     Route::get('/all/category' , 'AllCategory')->name('all.category');
     Route::get('/add/category' , 'AddCategory')->name('add.category');
@@ -142,7 +143,7 @@ Route::controller(CategoryController::class)->group(function(){
 
 });
 
-
+     //Admin Sub-Category All Route
 Route::controller(SubCategoryController::class)->group(function(){
     Route::get('/all/subcategory' , 'AllSubCategory')->name('all.subcategory');
     Route::get('/add/subcategory' , 'AddSubCategory')->name('add.subcategory');
@@ -154,7 +155,7 @@ Route::controller(SubCategoryController::class)->group(function(){
 
 });
 
-//Product
+  //Admin Product All Route
 Route::controller(ProductController::class)->group(function(){
     Route::get('/all/product' , 'AllProduct')->name('all.product');
     Route::get('/add/product' , 'AddProduct')->name('add.product');
@@ -173,7 +174,7 @@ Route::controller(ProductController::class)->group(function(){
 });
 
 
-//Vendor Active and Inactive 
+//Admin  Active and Inactive Vendor
 Route::controller(AdminController::class)->group(function(){
     Route::get('/inactive/vendor' , 'InactiveVendor')->name('inactive.vendor');
     Route::get('/active/vendor' , 'ActiveVendor')->name('active.vendor');
@@ -184,4 +185,18 @@ Route::controller(AdminController::class)->group(function(){
     
 });
 
-});// END MIDDLEWARE
+
+
+  //Admin SLIDER All Route
+  Route::controller(SliderController::class)->group(function(){
+    Route::get('/all/slider' , 'AllSlider')->name('all.slider');
+    Route::get('/add/slider' , 'AddSlider')->name('add.slider');
+    Route::post('/store/slider' , 'StoreSlider')->name('store.slider');
+    Route::get('/edit/slider/{id}' , 'EditSlider')->name('edit.slider');
+    Route::post('/update/slider' , 'UpdateSlider')->name('update.slider');
+    Route::get('/delete/slider/{id}' , 'DeleteSlider')->name('delete.slider');
+});
+
+
+
+});// END ADMIN MIDDLEWARE
