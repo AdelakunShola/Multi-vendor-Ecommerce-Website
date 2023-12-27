@@ -104,11 +104,11 @@
 			<div class="border border-3 p-4 rounded">
               <div class="row g-3">
 				<div class="col-md-6">
-					<label for="inputPrice" class="form-label">Product Price</label>
+					<label for="inputPrice" class="form-label">Product Price / New Price</label>
 					<input type="text" name="selling_price" class="form-control" id="inputPrice" placeholder="00.00">
 				  </div>
 				  <div class="col-md-6">
-					<label for="inputCompareatprice" class="form-label">Discount Price </label>
+					<label for="inputCompareatprice" class="form-label">Discount Price / Old Price</label>
 					<input type="text" name="discount_price" class="form-control" id="inputCompareatprice" placeholder="00.00">
 				  </div>
 				  <div class="form-group col-md-6">

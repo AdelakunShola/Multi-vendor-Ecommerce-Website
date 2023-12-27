@@ -81,11 +81,11 @@
               <div class="row g-3">
 
 				<div class="form-group col-md-6">
-					<label for="inputPrice" class="form-label">Product Price</label>
+					<label for="inputPrice" class="form-label">Product Price / New Price</label>
 					<input type="text" name="selling_price" class="form-control" id="inputPrice" value="{{ $products->selling_price }}">
 				  </div>
 				  <div class="col-md-6">
-					<label for="inputCompareatprice" class="form-label">Discount Price </label>
+					<label for="inputCompareatprice" class="form-label">Discount Price / Old Price</label>
 					<input type="text" name="discount_price" class="form-control" id="inputCompareatprice" value="{{ $products->discount_price }}">
 				  </div>
 				  <div class="form-group col-md-6">

@@ -42,7 +42,7 @@
 		</thead>
 		<tbody>
 	@foreach($products as $key => $item)		
-			<tr>
+			<tr> 
 				<td> {{ $key+1 }} </td>				
 				<td> <img src="{{ asset($item->product_thumbnail) }}" style="width: 70px; height:40px;" >  </td>
 				<td>{{ $item->product_name }}</td>
@@ -54,7 +54,7 @@
 			@else
 			@php
 			$amount = $item->selling_price - $item->discount_price;
-			$discount = ($item->discount_price / $item->selling_price) * 100;
+			$discount = ($amount/$item->selling_price) * 100;
 			@endphp
 		<span class="badge rounded-pill bg-danger"> {{ round($discount) }}%</span>
 			@endif
