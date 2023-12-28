@@ -15,6 +15,34 @@ use Carbon\Carbon;
 
 class IndexController extends Controller
 {
+
+    public function Index(){
+        $skip_category_0 = Category::skip(0)->first();
+        $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->limit(5)->get();
+
+        $skip_category_1 = Category::skip(1)->first();
+        $skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->limit(5)->get();
+
+        $skip_category_2 = Category::skip(2)->first();
+        $skip_product_2 = Product::where('status',1)->where('category_id',$skip_category_2->id)->orderBy('id','DESC')->limit(5)->get();
+
+        $hot_deals = Product::where('hot_deals',1)->where('status',1)->where('discount_price','!=','NULL')->orderBy('id','DESC')->limit(3)->get();
+
+        $special_offer = Product::where('special_offer',1)->where('status',1)->orderBy('id','DESC')->limit(3)->get();
+
+        $special_deals = Product::where('special_deals',1)->where('status',1)->where('discount_price','!=','NULL')->orderBy('id','DESC')->limit(3)->get();
+
+        $new = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+
+
+
+        return view('frontend.index',compact('skip_category_0','skip_product_0','skip_category_2','skip_product_2','skip_category_1','skip_product_1','hot_deals','special_offer','special_deals','new'));
+
+    } // End Method
+
+
+
+
     public function ProductDetails($id,$slug){
         $product = Product::findOrFail($id);
 
@@ -31,4 +59,13 @@ class IndexController extends Controller
 
         return view ('frontend.product.product_details',compact('product','product_size','product_color','multiImage','relatedProduct'));
     }//end method
+
+
+    public function VendorDetails($id){
+
+        $vendor = User::findOrFail($id);
+        $vproduct = Product::where('vendor_id',$id)->get();
+        return view('frontend.vendor.vendor_details',compact('vendor','vproduct'));
+
+     } // End Method 
 }

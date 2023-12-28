@@ -29,9 +29,12 @@ use App\Http\Controllers\Frontend\IndexController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+//Route::get('/', function () {
+//    return view('frontend.index');
+//});
+
+Route::get('/', [IndexController::class, 'Index']);
+    
 
 
 Route::middleware(['auth'])->group(function(){
@@ -221,4 +224,5 @@ Route::controller(BannerController::class)->group(function(){
 /// Frontend Product Details All Route 
 
 Route::get('product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
-    
+Route::get('/vendor/details/{id}', [IndexController::class, 'VendorDetails'])->name('vendor.details');
+Route::get('/vendor/all', [IndexController::class, 'VendorAll'])->name('vendor.all');
