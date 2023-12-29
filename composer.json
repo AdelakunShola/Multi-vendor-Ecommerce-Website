@@ -20,8 +20,16 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "bumbummen99/shoppingcart": "dev-laravel10"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/phobrv/LaravelShoppingcart.git",
+            "no-api": true
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
