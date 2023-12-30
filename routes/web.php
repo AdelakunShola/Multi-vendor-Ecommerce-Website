@@ -274,6 +274,17 @@ Route::controller(CompareController::class)->group(function(){
    Route::get('/compare-remove/{id}' , 'CompareRemove'); 
 
 });
+
+
+//  Cart All Route 
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart' , 'MyCart')->name('mycart');
+    Route::get('/get-cart-product' , 'GetCartProduct');
+    Route::get('/cart-remove/{id}' , 'CartRemove'); 
+    Route::get('/cart-decrement/{rowId}' , 'CartDecrement');
+    Route::get('/cart-increment/{rowId}' , 'CartIncrement');
+
+});
    
    
-   }); // end group middleware
+   }); // end user middleware

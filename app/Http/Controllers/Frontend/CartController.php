@@ -75,7 +75,7 @@ class CartController extends Controller
                 ],
             ]);
 
-   return response()->json(['success' => 'Successfully Added on Your Cart' ]);
+   return response()->json(['success' => 'Successfully added to your Cart' ]);
 
         }else{
 
@@ -123,10 +123,51 @@ class CartController extends Controller
     }// End Method
 
 
+    public function MyCart(){
 
-    
+        return view('frontend.mycart.view_mycart');
+
+    }// End Method
+
+    public function GetCartProduct(){
+
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQty' => $cartQty,  
+            'cartTotal' => $cartTotal
+
+        ));
+
+    }// End Method
 
 
+    public function CartRemove($rowId){
+        Cart::remove($rowId);
+        return response()->json(['success' => 'Successfully removed from cart']);
 
+    }// End Method
+
+
+    public function CartDecrement($rowId){
+
+        $row = Cart::get($rowId);
+        Cart::update($rowId, $row->qty -1);
+
+        return response()->json('Decrement');
+
+    }// End Method
+
+    public function CartIncrement($rowId){
+
+        $row = Cart::get($rowId);
+        Cart::update($rowId, $row->qty +1);
+
+        return response()->json('Increment');
+
+    }// End Method
 
 }
