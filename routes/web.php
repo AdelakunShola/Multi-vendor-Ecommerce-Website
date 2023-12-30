@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\BannerController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -99,7 +100,7 @@ Route::post('/vendor/update/password', [VendorController::class, 'UpdatePassword
         Route::post('/vendor/store/product' , 'VendorStoreProduct')->name('vendor.store.product');
         Route::get('/vendor/edit/product/{id}' , 'VendorEditProduct')->name('vendor.edit.product');
         Route::post('/vendor/update/product' , 'VendorUpdateProduct')->name('vendor.update.product');
-        Route::post('/vendor/update/product/thambnail' , 'VendorUpdateProductThabnail')->name('vendor.update.product.thumbnail');
+        Route::post('/vendor/update/product/thumbnail' , 'VendorUpdateProductThabnail')->name('vendor.update.product.thumbnail');
         Route::post('/vendor/update/product/multiimage' , 'VendorUpdateProductmultiImage')->name('vendor.update.product.multiimage');
         Route::get('/vendor/product/multiimg/delete/{id}' , 'VendorMultiimgDelete')->name('vendor.product.multiimg.delete');
         Route::get('/vendor/product/inactive/{id}' , 'VendorProductInactive')->name('vendor.product.inactive');
@@ -245,3 +246,21 @@ Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMi
 
 /// Add to cart store data For Product Details Page 
 Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
+
+/// Add to Wishlist 
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishList']);
+
+/// User All Route
+Route::middleware(['auth','role:user'])->group(function() {
+
+    // Wishlist All Route 
+   Route::controller(WishlistController::class)->group(function(){
+       Route::get('/wishlist' , 'AllWishlist')->name('wishlist');
+       Route::get('/get-wishlist-product' , 'GetWishlistProduct');
+       Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
+   
+   
+   }); 
+   
+   
+   }); // end group middleware
