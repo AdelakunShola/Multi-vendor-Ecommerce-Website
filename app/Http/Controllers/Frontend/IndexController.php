@@ -34,13 +34,11 @@ class IndexController extends Controller
 
         $new = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
 
-
-
         return view('frontend.index',compact('skip_category_0','skip_product_0','skip_category_2','skip_product_2','skip_category_1','skip_product_1','hot_deals','special_offer','special_deals','new'));
 
     } // End Method
 
-
+   
 
 
     public function ProductDetails($id,$slug){
@@ -89,7 +87,7 @@ class IndexController extends Controller
       return view('frontend.product.category_view',compact('products','categories','breadcat','newProduct'));
 
      }// End Method
-
+ 
 
      public function SubCatWiseProduct(Request $request,$id,$slug){
         $products = Product::where('status',1)->where('subcategory_id',$id)->orderBy('id','DESC')->get();

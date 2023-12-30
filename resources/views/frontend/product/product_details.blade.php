@@ -505,8 +505,8 @@
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
         </div>

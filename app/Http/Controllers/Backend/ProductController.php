@@ -20,7 +20,7 @@ class ProductController extends Controller
         $products = Product::latest()->get();
         return view('backend.product.product_all',compact('products'));
 
-    }//end method
+    }//end method 
 
     public function AddProduct(){
         $activeVendor = User::where('status', 'active')->where('role', 'vendor')->latest()->get();
@@ -36,6 +36,7 @@ class ProductController extends Controller
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         Image::make($image)->resize(800,800)->save('upload/products/thumbnail/'.$name_gen);
         $save_url = 'upload/products/thumbnail/'.$name_gen;
+        
 
         $product_id = Product::insertGetId([
 
@@ -65,6 +66,7 @@ class ProductController extends Controller
             'vendor_id' => $request->vendor_id,
             'status' => 1,
             'created_at' => Carbon::now(), 
+            
 
         ]);
 

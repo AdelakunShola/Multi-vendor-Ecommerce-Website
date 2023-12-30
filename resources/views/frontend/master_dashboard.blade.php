@@ -606,7 +606,7 @@ function wishlistRemove(id){
                                 <tr class="description">
                                     <td class="text-muted font-sm fw-600 font-heading">Description</td>
                                     <td class="row_text font-xs">
-                                        <p class="font-sm text-muted"> ${value.product.short_descp}</p>
+                                        <p class="font-sm text-muted"> ${value.product.short_desc}</p>
                                     </td>
                                     
                                 </tr>
