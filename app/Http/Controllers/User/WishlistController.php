@@ -53,7 +53,7 @@ class WishlistController extends Controller
     public function WishlistRemove($id){
 
         Wishlist::where('user_id',Auth::id())->where('id',$id)->delete();
-     return response()->json(['success' => 'Product Remove Successfully' ]);
+     return response()->json(['success' => 'Product Removed Successfully' ]);
     }// End Method
 
 }

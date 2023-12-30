@@ -577,7 +577,7 @@ function wishlistRemove(id){
 
 
                    var rows = ""
-                   $.each(response.wishlist, function(key,value){
+                   $.each(response.compare, function(key,value){
 
         rows += ` <tr class="pr_image">
                                     <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
@@ -641,7 +641,6 @@ function wishlistRemove(id){
         }
 
     compare();
-    
 
   // / End Load Compare Data -->
 
