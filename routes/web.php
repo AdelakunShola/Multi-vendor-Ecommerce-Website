@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
@@ -232,6 +233,45 @@ Route::controller(BannerController::class)->group(function(){
     Route::get('/delete/coupon/{id}' , 'DeleteCoupon')->name('delete.coupon');
 
 });
+
+
+// Shipping All Route 
+Route::controller(ShippingAreaController::class)->group(function(){
+    Route::get('/all/division' , 'AllDivision')->name('all.division');
+    Route::get('/add/division' , 'AddDivision')->name('add.division');
+    Route::post('/store/division' , 'StoreDivision')->name('store.division');
+    Route::get('/edit/division/{id}' , 'EditDivision')->name('edit.division');
+    Route::post('/update/division' , 'UpdateDivision')->name('update.division');
+    Route::get('/delete/division/{id}' , 'DeleteDivision')->name('delete.division');
+
+});
+
+
+ // Shipping District All Route 
+ Route::controller(ShippingAreaController::class)->group(function(){
+    Route::get('/all/district' , 'AllDistrict')->name('all.district');
+    Route::get('/add/district' , 'AddDistrict')->name('add.district');
+    Route::post('/store/district' , 'StoreDistrict')->name('store.district');
+    Route::get('/edit/district/{id}' , 'EditDistrict')->name('edit.district');
+    Route::post('/update/district' , 'UpdateDistrict')->name('update.district');
+    Route::get('/delete/district/{id}' , 'DeleteDistrict')->name('delete.district');
+
+}); 
+
+
+ // State All Route 
+ Route::controller(ShippingAreaController::class)->group(function(){
+    Route::get('/all/state' , 'AllState')->name('all.state');
+    Route::get('/add/state' , 'AddState')->name('add.state');
+    Route::post('/store/state' , 'StoreState')->name('store.state');
+    Route::get('/edit/state/{id}' , 'EditState')->name('edit.state');
+    Route::post('/update/state' , 'UpdateState')->name('update.state');
+    Route::get('/delete/state/{id}' , 'DeleteState')->name('delete.state');
+
+    Route::get('/district/ajax/{division_id}' , 'GetDistrict');
+
+}); 
+
 
 
 
