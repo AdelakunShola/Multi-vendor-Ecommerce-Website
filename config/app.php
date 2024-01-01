@@ -163,6 +163,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
@@ -183,6 +184,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Image' => Intervention\Image\Facades\Image::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),

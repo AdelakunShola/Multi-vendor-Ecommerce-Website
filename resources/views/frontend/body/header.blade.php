@@ -122,7 +122,7 @@
                 <div class="header-action-icon-2">
                     <a class="mini-cart-icon" href="shop-cart.html">
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
-                        <span class="pro-count blue" id="cartQty"> </span>
+                        <span class="pro-count blue" id="cartQty">0 </span>
                     </a>
                     <a href="{{ route('mycart') }}"><span class="lable">Cart</span></a>
                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -162,7 +162,7 @@
 
 
     @auth
-    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+    <a href="{{ route('dashboard') }}"><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
             <ul>
                 <li>
