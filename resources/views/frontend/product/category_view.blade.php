@@ -127,16 +127,16 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->selling_price, 0, '.', ',') }}</span>
 
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                     </div>
-                    @endif
+                    @endif 
 
 
 
@@ -213,9 +213,9 @@ $products = App\Models\Product::where('category_id',$category->id)->get();
                 <p><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></p>
 
                    @if($product->discount_price == NULL)
-                    <p class="price mb-0 mt-5">${{ $product->selling_price }}</p>
+                    <p class="price mb-0 mt-5">${{ number_format($product->selling_price, 0, '.', ',') }}</p>
                    @else
-                   <p class="price mb-0 mt-5">${{ $product->discount_price }}</p>
+                   <p class="price mb-0 mt-5">${{ number_format($product->discount_price, 0, '.', ',') }}</p>
                    @endif
 
                 <div class="product-rate">

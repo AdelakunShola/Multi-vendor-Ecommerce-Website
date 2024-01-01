@@ -46,7 +46,7 @@
 				<td> {{ $key+1 }} </td>				
 				<td> <img src="{{ asset($item->product_thumbnail) }}" style="width: 70px; height:40px;" >  </td>
 				<td>{{ $item->product_name }}</td>
-				<td>${{ number_format($item->selling_price, 0, '.', ',') }}</td>${{ number_format($item->selling_price, 0, '.', ',') }}
+				<td>${{ number_format($item->selling_price, 0, '.', ',') }}</td>
 				<td>{{ $item->product_qty }}</td>
 				<td>
 					@if($item->discount_price == NULL)

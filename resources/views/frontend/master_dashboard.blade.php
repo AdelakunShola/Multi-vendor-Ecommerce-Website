@@ -399,63 +399,57 @@
 <!--  /// Start Load Wishlist Data -->
     <script type="text/javascript">
         
-        function wishlist(){
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                url: "/get-wishlist-product/",
+        function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
-                success:function(response){
+function wishlist() {
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: "/get-wishlist-product/",
+        success: function(response) {
+            $('#wishQty').text(response.wishQty);
 
-                $('#wishQty').text(response.wishQty);
-
-                   var rows = ""
-                   $.each(response.wishlist, function(key,value){
-
-        rows += `<tr class="pt-30">
-                        <td class="custome-checkbox pl-30">
-                            
-                        </td>
-                        <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thumbnail}" alt="#" /></td>
-                        <td class="product-des product-name">
-                            <h6><a class="product-name mb-10" href="shop-product-right.html">${value.product.product_name} </a></h6>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
+            var rows = "";
+            $.each(response.wishlist, function(key, value) {
+                rows += `<tr class="pt-30">
+                            <td class="custome-checkbox pl-30">
+                                
+                            </td>
+                            <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thumbnail}" alt="#" /></td>
+                            <td class="product-des product-name">
+                                <h6><a class="product-name mb-10" href="shop-product-right.html">${value.product.product_name} </a></h6>
+                                <div class="product-rate-cover">
+                                    <div class="product-rate d-inline-block">
+                                        <div class="product-rating" style="width: 90%"></div>
+                                    </div>
+                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            </div>
-                        </td>
-                        <td class="price" data-title="Price">
-                        ${value.product.discount_price == null
-                        ? `<h3 class="text-brand">$${value.product.selling_price}</h3>`
-                        :`<h3 class="text-brand">$${value.product.discount_price}</h3>`
+                            </td>
+                            <td class="price" data-title="Price">
+                                ${value.product.discount_price == null
+                                    ? `<h3 class="text-brand">$${numberWithCommas(value.product.selling_price)}</h3>`
+                                    : `<h3 class="text-brand">$${numberWithCommas(value.product.discount_price)}</h3>`
+                                }
+                            </td>
+                            <td class="text-center detail-info" data-title="Stock">
+                                ${value.product.product_qty > 0
+                                    ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
+                                    : `<span class="stock-status out-stock mb-0">Stock Out </span>`
+                                } 
+                            </td>
+                            <td class="action text-center" data-title="Remove">
+                                <a type="submit" class="text-body" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="fi-rs-trash"></i></a>
+                            </td>
+                        </tr>`;
+            });
 
-                        }
-                            
-                        </td>
-                        <td class="text-center detail-info" data-title="Stock">
-                            ${value.product.product_qty > 0 
-                                ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
-
-                                :`<span class="stock-status out-stock mb-0">Stock Out </span>`
-
-                            } 
-                           
-                        </td>
-                       
-                        <td class="action text-center" data-title="Remove">
-                            <a type="submit" class="text-body" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="fi-rs-trash"></i></a>
-                        </td>
-                    </tr> ` 
-
-       });
-
-       $('#wishlist').html(rows); 
-
-                }
-            })
+            $('#wishlist').html(rows);
         }
+    });
+}
+
 
     wishlist();
 
@@ -558,87 +552,59 @@ function wishlistRemove(id){
 
 
     </script> 
-<!--  /// End Compare Add -->
+<!--  /// End Compare Add --> 
 
 
 <!--  /// Start Load Compare Data -->
     <script type="text/javascript">
 
         
-        function compare(){
-            $.ajax({
-                type: "GET",
-                dataType: 'json',
-                url: "/get-compare-product/",
+function compare() {
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: "/get-compare-product/",
+        success: function (response) {
+            $('#compareQty').text(response.compareQty);
 
-                success:function(response){ 
+            var rows = "";
+            var numberFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
-                $('#compareQty').text(response.compareQty);
+            $.each(response.compare, function (key, value) {
+                let formattedPrice = value.product.discount_price == null
+                    ? numberFormat.format(value.product.selling_price)
+                    : numberFormat.format(value.product.discount_price);
 
+                rows += `<tr class="pr_image">
+                            <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
+                            <td class="row_img"><img src="/${value.product.product_thumbnail}" style="width:300px; height:300px;" alt="compare-img" /></td>
+                        </tr>
+                        <tr class="pr_title">
+                            <td class="text-muted font-sm fw-600 font-heading">Name</td>
+                            <td class="product_name">
+                                <h6><a href="shop-product-full.html" class="text-heading">${value.product.product_name}</a></h6>
+                            </td>
+                        </tr>
+                        <tr class="pr_price">
+                            <td class="text-muted font-sm fw-600 font-heading">Price</td>
+                            <td class="product_price">
+                                <h4 class="price text-brand">${formattedPrice}</h4>
+                            </td>
+                        </tr>
+                        <!-- ... (other rows) ... -->
+                        <tr class="pr_remove text-muted">
+                            <td class="text-muted font-md fw-600"></td>
+                            <td class="row_remove">
+                                <a type="submit" class="text-muted" id="${value.id}" onclick="compareRemove(this.id)"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
+                            </td>
+                        </tr> `;
+            });
 
-                   var rows = ""
-                   $.each(response.compare, function(key,value){
-
-        rows += ` <tr class="pr_image">
-                                    <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
-    <td class="row_img"><img src="/${value.product.product_thumbnail} " style="width:300px; height:300px;"  alt="compare-img" /></td>
-                                    
-                                </tr>
-                                <tr class="pr_title">
-                                    <td class="text-muted font-sm fw-600 font-heading">Name</td>
-                                    <td class="product_name">
-                                        <h6><a href="shop-product-full.html" class="text-heading">${value.product.product_name} </a></h6>
-                                    </td>
-                                   
-                                </tr>
-                                <tr class="pr_price">
-                                    <td class="text-muted font-sm fw-600 font-heading">Price</td>
-                                    <td class="product_price">
-                      ${value.product.discount_price == null
-                        ? `<h4 class="price text-brand">$${value.product.selling_price}</h4>`
-                        :`<h4 class="price text-brand">$${value.product.discount_price}</h4>`
-
-                        } 
-                                    </td>
-                                  
-                                </tr>
-                                
-                                <tr class="description">
-                                    <td class="text-muted font-sm fw-600 font-heading">Description</td>
-                                    <td class="row_text font-xs">
-                                        <p class="font-sm text-muted"> ${value.product.short_desc}</p>
-                                    </td>
-                                    
-                                </tr>
-                                <tr class="pr_stock">
-                                    <td class="text-muted font-sm fw-600 font-heading">Stock status</td>
-                                    <td class="row_stock">
-                                ${value.product.product_qty > 0 
-                                ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
-
-                                :`<span class="stock-status out-stock mb-0">Stock Out </span>`
-
-                               } 
-
-                              </td>
-                                   
-                                </tr>
-                                
-            <tr class="pr_remove text-muted">
-                <td class="text-muted font-md fw-600"></td>
-                <td class="row_remove">
-                    <a type="submit" class="text-muted"  id="${value.id}" onclick="compareRemove(this.id)"><i class="fi-rs-trash mr-5"></i><span>Remove</span> </a>
-                </td>
-                
-            </tr> ` 
-
-       });
-
-       $('#compare').html(rows); 
-
-                }
-            })
+            $('#compare').html(rows);
         }
+    });
+}
+
 
     compare();
 
@@ -696,73 +662,67 @@ function wishlistRemove(id){
 
   <!--  // Start Load MY Cart // -->
 <script type="text/javascript">
-    function cart(){
+    function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function cart() {
     $.ajax({
         type: 'GET',
         url: '/get-cart-product',
         dataType: 'json',
-        success:function(response){
-            // console.log(response)
- 
+        success: function(response) {
+            var rows = "";
 
-        var rows = ""
+            $.each(response.carts, function(key, value) {
+                var formattedPrice = '$' + numberWithCommas(value.price);
+                var formattedSubtotal = '$' + numberWithCommas(value.subtotal);
 
-        $.each(response.carts, function(key,value){
-           rows += `<tr class="pt-30">
-            <td class="custome-checkbox pl-30">
-                 
-            </td>
-            <td class="image product-thumbnail pt-40"><img src="/${value.options.image} " alt="#"></td>
-            <td class="product-des product-name">
-                <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name} </a></h6>
-                
-            </td>
-            <td class="price" data-title="Price">
-                <h4 class="text-body">$${value.price} </h4>
-            </td>
-
-              <td class="price" data-title="Price">
-              ${value.options.color == null
-                ? `<span>.... </span>`
-                : `<h6 class="text-body">${value.options.color} </h6>`
-              } 
-            </td>
-
-               <td class="price" data-title="Price">
-              ${value.options.size == null
-                ? `<span>.... </span>`
-                : `<h6 class="text-body">${value.options.size} </h6>`
-              } 
-            </td>
-
-
-            <td class="text-center detail-info" data-title="Stock">
-                <div class="detail-extralink mr-15">
-                    <div class="detail-qty border radius">
-                        
-     <a type="submit" class="qty-down" id="${value.rowId}" onclick="cartDecrement(this.id)"><i class="fi-rs-angle-small-down"></i></a>
-                       
-      <input type="text" name="quantity" class="qty-val" value="${value.qty}" min="1">
-
-     <a  type="submit" class="qty-up" id="${value.rowId}" onclick="cartIncrement(this.id)"><i class="fi-rs-angle-small-up"></i></a>
-
-                    </div>
-                </div>
-            </td>
-            <td class="price" data-title="Price">
-                <h4 class="text-brand">$${value.subtotal} </h4>
-            </td>
-            <td class="action text-center" data-title="Remove">
-            <a type="submit" class="text-body"  id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fi-rs-trash"></i></a></td>
-        </tr>`  
-          });
+                rows += `<tr class="pt-30">
+                            <td class="custome-checkbox pl-30">
+                            </td>
+                            <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
+                            <td class="product-des product-name">
+                                <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name} </a></h6>
+                            </td>
+                            <td class="price" data-title="Price">
+                                <h4 class="text-body">${formattedPrice}</h4>
+                            </td>
+                            <td class="price" data-title="Price">
+                                ${value.options.color == null
+                                    ? `<span>.... </span>`
+                                    : `<h6 class="text-body">${value.options.color} </h6>`
+                                }
+                            </td>
+                            <td class="price" data-title="Price">
+                                ${value.options.size == null
+                                    ? `<span>.... </span>`
+                                    : `<h6 class="text-body">${value.options.size} </h6>`
+                                }
+                            </td>
+                            <td class="text-center detail-info" data-title="Stock">
+                                <div class="detail-extralink mr-15">
+                                    <div class="detail-qty border radius">
+                                        <a type="submit" class="qty-down" id="${value.rowId}" onclick="cartDecrement(this.id)"><i class="fi-rs-angle-small-down"></i></a>
+                                        <input type="text" name="quantity" class="qty-val" value="${value.qty}" min="1">
+                                        <a type="submit" class="qty-up" id="${value.rowId}" onclick="cartIncrement(this.id)"><i class="fi-rs-angle-small-up"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price" data-title="Price">
+                                <h4 class="text-brand">${formattedSubtotal}</h4>
+                            </td>
+                            <td class="action text-center" data-title="Remove">
+                                <a type="submit" class="text-body" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fi-rs-trash"></i></a>
+                            </td>
+                        </tr>`;
+            });
 
             $('#cartPage').html(rows);
-
         }
+    });
+}
 
-    })
- }
   cart();
 
   // Cart Remove Start 
@@ -775,7 +735,8 @@ function wishlistRemove(id){
                 success:function(data){
                     cart();
                     miniCart();
-                     // Start Message 
+                    couponCalculation();
+                    // Start Message 
 
             const Toast = Swal.mixin({
                   toast: true,
@@ -817,6 +778,7 @@ function wishlistRemove(id){
         url: "/cart-increment/"+rowId,
         dataType: 'json',
         success:function(data){
+            couponCalculation();
             cart();
             miniCart();
 
@@ -837,6 +799,7 @@ function wishlistRemove(id){
         success:function(data){
             cart();
             miniCart();
+            couponCalculation();
 
         }
     });
@@ -850,6 +813,193 @@ function wishlistRemove(id){
 </script>
  <!--  // End Load MY Cart // -->
 
+
+
+
+
+
+<!--  ////////////// Start Apply Coupon ////////////// -->
+<script type="text/javascript">
+    
+  function applyCoupon(){
+    var coupon_name = $('#coupon_name').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {coupon_name:coupon_name},
+
+                url: "/coupon-apply",
+
+                success:function(data){
+                    couponCalculation();
+
+                    if (data.validity == true) {
+                        $('#couponField').hide();
+                    }
+                   
+
+                     // Start Message 
+
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+
+              // End Message  
+
+
+                }
+            })
+        }
+
+// Start CouponCalculation Method   
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function couponCalculation() {
+    $.ajax({
+        type: 'GET',
+        url: "/coupon-calculation",
+        dataType: 'json',
+        success: function(data) {
+            if (data.total) {
+                $('#couponCalField').html(
+                    `<tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Subtotal</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">$${numberWithCommas(data.total)}</h4>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Grand Total</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">$${numberWithCommas(data.total)}</h4>
+                        </td>
+                    </tr>`
+                );
+            } else {
+                $('#couponCalField').html(
+                    `<tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Subtotal</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">$${numberWithCommas(data.subtotal)}</h4>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Coupon</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h6 class="text-brand text-end">${data.coupon_name} <a type="submit" onclick="couponRemove()"><i class="fi-rs-trash"></i></a></h6>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Discount Amount</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">$${numberWithCommas(data.discount_amount)}</h4>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Grand Total</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">$${numberWithCommas(data.total_amount)}</h4>
+                        </td>
+                    </tr>`
+                );
+            }
+        }
+    });
+}
+
+
+  couponCalculation();
+     // Start CouponCalculation Method   
+
+
+</script>
+
+   <!--  ////////////// End Apply Coupon ////////////// -->
+
+<script type="text/javascript">
+    // Coupon Remove Start 
+  function couponRemove(){
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/coupon-remove",
+
+                success:function(data){
+                   couponCalculation();
+                   $('#couponField').show();
+                     // Start Message 
+
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+
+              // End Message  
+
+
+                }
+            })
+        }
+// Coupon Remove End 
+
+</script>
 
 </body>
 

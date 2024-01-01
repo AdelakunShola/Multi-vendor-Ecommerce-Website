@@ -100,14 +100,14 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
 
@@ -218,14 +218,14 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
 
@@ -340,14 +340,14 @@
 
                     @if($product->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $product->discount_price }}</span>
-                        <span class="old-price">${{ $product->selling_price }}</span>
+                        <span>${{ number_format($product->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($product->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
 
@@ -409,14 +409,14 @@
             </div>
              @if($item->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $item->discount_price }}</span>
-                        <span class="old-price">${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
         </div>
@@ -453,14 +453,14 @@
             </div>
              @if($item->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $item->discount_price }}</span>
-                        <span class="old-price">${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
         </div>
@@ -493,14 +493,14 @@
             </div>
              @if($item->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $item->discount_price }}</span>
-                        <span class="old-price">${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
         </div>
@@ -533,14 +533,14 @@
             </div>
              @if($item->discount_price == NULL)
                      <div class="product-price">
-                        <span>${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                        
                     </div>
 
                     @else
                     <div class="product-price">
-                        <span>${{ $item->discount_price }}</span>
-                        <span class="old-price">${{ $item->selling_price }}</span>
+                        <span>${{ number_format($item->discount_price, 0, '.', ',') }}</span>
+                        <span class="old-price">${{ number_format($item->selling_price, 0, '.', ',') }}</span>
                     </div>
                     @endif
         </div>
