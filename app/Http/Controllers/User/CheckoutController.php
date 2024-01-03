@@ -46,13 +46,15 @@ class CheckoutController extends Controller
         $cartTotal = Cart::total();
 
         if ($request->payment_option == 'stripe') {
-           return view('frontend.payment.stripe',compact('data','cartTotal'));
-        }elseif ($request->payment_option == 'card'){
+            return view('frontend.payment.stripe', compact('data', 'cartTotal'));
+        } elseif ($request->payment_option == 'card') {
             return 'Card Page';
-        }else{
-            return view('frontend.payment.cash',compact('data','cartTotal'));
+        } elseif ($request->payment_option == 'paystack') {
+            return view('frontend.payment.paystack', compact('data', 'cartTotal'));
+        } else {
+            return view('frontend.payment.cash', compact('data', 'cartTotal'));
         }
-
+        
 
     }// End Method 
 }

@@ -23,6 +23,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\PaystackController;
+use App\Http\Controllers\User\StripeController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -365,6 +367,17 @@ Route::controller(CompareController::class)->group(function(){
 }); 
 
 
+ // Stripe All Route 
+ Route::controller(StripeController::class)->group(function(){
+    Route::post('/stripe/order' , 'StripeOrder')->name('stripe.order');
+
+}); 
+
+
+ // paystack All Route 
+ Route::controller(PaystackController::class)->group(function(){
+    Route::post('/paystack/order' , 'PaystackOrder')->name('paystack.order');
+
+}); 
    
-   
-   }); // end user middleware
+}); // end user middleware
